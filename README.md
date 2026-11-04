@@ -16,8 +16,8 @@ My one-page resume, maintained in LaTeX and compiled with XeLaTeX.
 ## Get started
 
 ```sh
-git clone https://github.com/ghostdevhv/resume-latex.git
-cd resume-latex
+git clone https://github.com/ghostdevhv/resume.git
+cd resume
 ```
 
 Install XeLaTeX and the packages below once, then follow [Compile](#compile). Always build from the project directory so the bundled fonts resolve correctly.
