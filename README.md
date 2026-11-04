@@ -1,6 +1,26 @@
 # Himanshu Verma — Resume
 
-LaTeX source: `Himanshu_Resume.tex`. The project uses XeLaTeX and the four Fontin font files included in this directory. Run builds from this directory so the fonts resolve correctly.
+My one-page resume, maintained in LaTeX and compiled with XeLaTeX.
+
+[View the resume PDF](Himanshu_Resume.pdf) · [Website](https://ghostdevhv.me/) · [LinkedIn](https://www.linkedin.com/in/himanshu-verma-1b930990/) · [GitHub](https://github.com/ghostdevhv)
+
+## Project files
+
+| File | Purpose |
+| --- | --- |
+| `Himanshu_Resume.tex` | Editable resume source |
+| `Himanshu_Resume.pdf` | Compiled resume, tracked alongside the source |
+| `Fontin*.otf` | Four local font files used by the document |
+| `.gitignore` | Excludes build logs, auxiliary files, and local tooling files |
+
+## Get started
+
+```sh
+git clone https://github.com/ghostdevhv/resume-latex.git
+cd resume-latex
+```
+
+Install XeLaTeX and the packages below once, then follow [Compile](#compile). Always build from the project directory so the bundled fonts resolve correctly.
 
 ## Install on macOS
 
@@ -12,7 +32,7 @@ Install BasicTeX (a smaller TeX Live distribution that includes XeLaTeX):
 brew install --cask basictex
 ```
 
-The installer requires a macOS administrator password. Run this command in an interactive Terminal, or complete the BasicTeX graphical installer. Do not enter your password into chat.
+The installer requires a macOS administrator password. Run this command in an interactive Terminal, or complete the BasicTeX graphical installer. The package commands below use a user-local TeX directory and do not require `sudo`.
 
 Restart Terminal after installation, or enable TeX commands in the current shell:
 
@@ -39,7 +59,7 @@ mkdir -p "$HOME/Library/texmf/tlpkg/backups"
 /Library/TeX/texbin/tlmgr --usermode remove tools
 ```
 
-For a system-wide installation instead, run `sudo tlmgr update --self` and `sudo tlmgr update --all` together before installing missing packages, so the kernel and packages stay compatible. These commands require an administrator password in Terminal.
+For system-wide package management instead, keep the TeX Live kernel and package versions compatible. Avoid mixing newly updated core packages with an older LaTeX kernel; the user-local setup above is the configuration verified for this project.
 
 Alternatively, `brew install --cask mactex-no-gui` installs a much larger distribution with a broad package collection, generally avoiding individual package installation.
 
@@ -52,7 +72,7 @@ xelatex -interaction=nonstopmode -halt-on-error -file-line-error Himanshu_Resume
 xelatex -interaction=nonstopmode -halt-on-error -file-line-error Himanshu_Resume.tex
 ```
 
-The second pass resolves references and PDF link metadata. The output is `Himanshu_Resume.pdf`; auxiliary files are `.aux`, `.log`, and `.out`.
+After editing `Himanshu_Resume.tex`, run both commands again and review the resulting PDF before committing the source and PDF together. The second pass resolves references and PDF link metadata. The output is `Himanshu_Resume.pdf`; auxiliary files are `.aux`, `.log`, and `.out`.
 
 Use XeLaTeX rather than pdfLaTeX: `fontspec` loads the bundled OpenType fonts. No system-wide Fontin installation is required.
 
@@ -72,13 +92,13 @@ Use XeLaTeX rather than pdfLaTeX: `fontspec` loads the bundled OpenType fonts. N
 
 - **`xelatex: command not found`:** restart Terminal or set the PATH shown above. The binary should be `/Library/TeX/texbin/xelatex`.
 - **`File ...sty not found`:** install the corresponding package with `/Library/TeX/texbin/tlmgr --usermode install PACKAGE`. Use `/Library/TeX/texbin/tlmgr --usermode search --global --file '/FILENAME.sty'` to find its package. Keep the bundled `tools` version as explained above.
-- **FontAwesome cannot be found:** copy its OpenType file to your user Fonts directory as shown above. In a sandboxed command runner, font services may require running the build with approved access outside the sandbox.
+- **FontAwesome cannot be found:** copy its OpenType file to your user Fonts directory as shown above. If an editor cannot see the installed font, restart it and try the build in Terminal.
 - **Fontin cannot be found:** confirm all four `.otf` files are beside the source and compile from this directory.
 - **Build errors:** inspect `Himanshu_Resume.log`; `-halt-on-error` stops at the first error.
-- **Editor preview download timeout:** the built-in editor compiler downloads its own dependencies and may operate independently of a local TeX installation. The local XeLaTeX commands above are verified to work; a successful terminal build does not confirm that the editor's separate compiler has finished downloading its dependencies.
+- **Editor preview differs from Terminal:** some editors use a separate compiler or download their own packages. Select XeLaTeX and compare against the local build commands above.
 
-## Setup status (27 October 2026)
+## Verified build (4 November 2026)
 
-BasicTeX 2026.0301 / TeX Live 2026 and XeLaTeX are installed. The additional packages were installed in the user tree, and FontAwesome was copied to the user Fonts directory. The resume compiled successfully with two XeLaTeX passes, producing a one-page `Himanshu_Resume.pdf`, without source edits.
+BasicTeX 2026.0301 / TeX Live 2026 and XeLaTeX are installed. The additional packages were installed in the user tree, and FontAwesome was copied to the user Fonts directory. The latest header and contact updates compiled successfully with two XeLaTeX passes, producing a one-page `Himanshu_Resume.pdf`. The header contains GitHub and LinkedIn on the left, the name and Bengaluru, India in the center, and email and website on the right; the phone number is omitted.
 
-Remaining nonfatal warnings: obsolete `xcolor` option `usenames`, font-shape substitutions, and an overfull horizontal box of approximately 35.25 pt in the Education table (source lines 310–314).
+Remaining nonfatal warnings: obsolete `xcolor` option `usenames`, font-shape substitutions, and an overfull horizontal box of approximately 35.25 pt in the Education table (the Education table uses a fixed width).
